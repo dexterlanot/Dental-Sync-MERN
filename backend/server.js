@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const User = require('./models/userSchema');
 const SECRET_KEY = 'secretkey'
 
@@ -73,6 +74,7 @@ app.post('/login', async (req, res) => {
 
         res.json({ message: 'Login successful', token }); 
     } catch (error) {
+        console.error('Error during login:', error);
         res.status(500).json({ error: 'Error logging in' });
     }
 });
