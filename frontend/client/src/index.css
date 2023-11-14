@@ -7,6 +7,8 @@
     --grey: #F5F5F5;
     --darkgrey: #5D5D5D;
     --black: #000000;
+    --red: #ff8080;
+    --darkred: #b30000;
 }
 
 *{
@@ -14,6 +16,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
+    overflow: hidden;
 }
 
 nav {
@@ -33,7 +36,8 @@ nav {
 
 nav img {
     width: 150px;
-    padding-top: 10px;
+    padding-top: 5px;
+    margin: 10px;
 }
 
 nav .navigation ul {
@@ -64,6 +68,20 @@ nav .navigation ul li .link:hover {
     color: var(--white);
     background-color: var(--bluegreen2);
 }
+
+.sign-out-button {
+  background-color: var(--bluegreen1); /* Your custom background color */
+  color: var(--white); /* Your custom text color */
+  font-size: 14px; /* Your custom font size */
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
 /* home */
 .home {
     width: 100%;
@@ -132,10 +150,6 @@ nav .navigation ul li .link:hover {
     width: 13px;
 }
 
-.login-icon path:hover {
-    color: var(--bluegreen1);
-}
-
 .arrow {
     position: absolute;
     right: 0;
@@ -158,10 +172,11 @@ nav .navigation ul li .link:hover {
   }
 
 .button:hover .arrow {
+    font-weight: 600;
     animation: slide-right .6s ease-out both;
 }
 
-/* signup */
+/* signup / login */
 .sign-up-container {
     background-image: linear-gradient(to right, rgba(11, 96, 120, 0.9), rgba(19, 83, 102, 0.2)),url("./assets/landing.jpg");
     background-size: cover;
@@ -192,7 +207,7 @@ nav .navigation ul li .link:hover {
     color: var(--bluegreen2);
     padding-bottom: 5px;
   }
-  
+
   .form button {
     align-self: flex-end;
   }
@@ -203,6 +218,15 @@ nav .navigation ul li .link:hover {
     font-weight: 500;
   }
 
+  .error-message {
+    padding: 8px;
+    font-size: 12px;
+    text-align: center;
+    color: var(--white);
+    background-color: var(--red); 
+    border-radius: 5px;
+    border: solid 1px var(--darkred);
+  }
 
   .flex-row {
     display: flex;

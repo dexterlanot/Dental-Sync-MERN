@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 function Home() {
   return (
-
+    
     <section className='home'>
       <div className='welcome-text'>
         <p>
@@ -22,6 +22,7 @@ function Home() {
       </div>
 
     </section>
+    
   )
 }
 
