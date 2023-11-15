@@ -53,14 +53,14 @@ function Signup() {
             <div className="flex-column">
               <label>First Name</label>
               <div className="inputForm">
-                <input type="text" className="input" placeholder="Enter your First Name" value={firstname} onChange={(e) => setFName(e.target.value)} required />
+                <input type="text" className="input" placeholder="First Name" value={firstname} onChange={(e) => setFName(e.target.value)} required />
               </div>
             </div>
 
             <div className="flex-column">
               <label>Last Name</label>
               <div className="inputForm">
-                <input type="text" className="input" placeholder="Enter your Last Name" value={lastname} onChange={(e) => setLName(e.target.value)} required />
+                <input type="text" className="input" placeholder="Last Name" value={lastname} onChange={(e) => setLName(e.target.value)} required />
               </div>
             </div>
           </div>
@@ -68,14 +68,14 @@ function Signup() {
           <div className="flex-column">
             <label>Email</label>
             <div className="inputForm">
-              <input type="text" className="input" placeholder="Enter your Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+              <input type="text" className="input" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
             </div>
           </div>
 
           <div className="flex-column">
             <label>Password</label>
             <div className="inputForm">
-              <input type="password" className="input" placeholder="Enter your Password" value={password} onChange={(e) => setPass(e.target.value)} required />
+              <input type="password" className="input" placeholder="Password" value={password} onChange={(e) => setPass(e.target.value)} required />
             </div>
           </div>
 

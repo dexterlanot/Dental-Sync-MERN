@@ -18,7 +18,6 @@ function App() {
       <TransitionGroup>
         <CSSTransition key={location.key} classNames="fade" timeout={300}>
         <Routes>
-
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<Signup />} />

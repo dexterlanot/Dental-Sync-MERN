@@ -47,19 +47,19 @@ function Login() {
       <div className='sign-up-form'>
     
         <form className="form" onSubmit={handleLogin}>
-          <h2>Login</h2>
+          <h2>Welcome Back</h2>
           {error && <p className="error-message">{error}</p>}
           <div className="flex-column">
             <label>Email</label>
             <div className="inputForm">
-              <input type="text" className="input" placeholder="Enter your Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+              <input type="text" className="input" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
             </div>
           </div>
 
           <div className="flex-column">
             <label>Password</label>
             <div className="inputForm">
-              <input type="password" className="input" placeholder="Enter your Password" value={password} onChange={(e) => setPass(e.target.value)} required />
+              <input type="password" className="input" placeholder="Password" value={password} onChange={(e) => setPass(e.target.value)} required />
             </div>
           </div>
 
