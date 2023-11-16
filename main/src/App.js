@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Services from './pages/Services';
 import About from './pages/About'
 import Contact from './pages/Contact';
+import Footer from './pages/Footer';
 import Navbar from './components/NavBar';
 import './index.css';
 import './App.css'
@@ -24,6 +25,9 @@ function App() {
         </div>
         <div id='contact'>
           <Contact />
+        </div>
+        <div>
+          <Footer />
         </div>
       </main>
     </div>

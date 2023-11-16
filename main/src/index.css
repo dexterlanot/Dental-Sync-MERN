@@ -78,6 +78,12 @@ nav .navigation ul li .appointment-link{
   align-items: center;
 }
 
+nav .navigation svg{
+  cursor: pointer;
+  z-index: 10001;
+  display: none;
+}
+
 nav .navigation ul li .link:hover {
   color: var(--bluegreen1);
   background-color: var(--grey);
@@ -129,7 +135,6 @@ nav .navigation ul li .link:hover {
   font-weight: 700;
   color: var(--bluegreen1);
   border: none;
-
   cursor: pointer;
 }
 
@@ -139,7 +144,7 @@ nav .navigation ul li .link:hover {
 .services {
     width: 100%;
     min-height: 100vh;
-    padding: 0 8%;   
+    padding: 0 5vw;   
 }
 
 .services h1{
@@ -207,7 +212,7 @@ nav .navigation ul li .link:hover {
 .about {
   width: 100%;
   min-height: 100vh;
-  padding: 0 5%;   
+  padding: 0 5vw;  
   align-items: center;
   justify-content: center;
   position: relative;
@@ -267,6 +272,7 @@ nav .navigation ul li .link:hover {
   margin: 0px 25px;
   justify-content: center;
   align-items: center;
+  text-align: justify;
 }
 
 .about .about-img img {
@@ -308,7 +314,7 @@ nav .navigation ul li .link:hover {
   width: 100%;
   height: auto;
   margin: auto;
-  padding: 10px;
+  /* padding: 10px; */
   border-radius: 10px;
 }
 
@@ -326,7 +332,7 @@ nav .navigation ul li .link:hover {
 .contact .contact-details {
   width: 100%;
   height: auto;
-  padding: 50px 70px;
+  padding: 5vw;
 }
 
 .contact .contact-details .contact-info {
@@ -357,12 +363,108 @@ nav .navigation ul li .link:hover {
   border-radius: 10px;
 }
 
+footer {
+  min-height: 3vh;
+  bottom: 0;
+  width: 100%;
+  position: relative;
+  background-color: var(--bluegreen2);
+}
 
+.footer-content {
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+}
 
+.footer-content p {
+  text-align: center;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--white);
+}
 
 @media screen and (max-width: 768px){
+  
+  nav .navigation svg{
+    display: block;
+  }
+
+  nav .navigation ul {
+    position: absolute;
+    top: 100%;
+    right: -100%;
+    width: 100vw;
+    max-height: 100vh; 
+    padding: 20px;
+    overflow-y: auto;
+    background: var(--bluegreen2);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    transition: all .50s ease;
+    z-index: 1000;
+  }
+
+  nav .navigation ul li .link{
+    color: var(--white);
+  }
+
+  nav .navigation ul li .appointment-link{
+    line-height: 5rem;
+    background: var(--white);
+    color: var(--bluegreen2);
+  }
+
+  nav.open .navigation ul{
+    right: 0;
+  }
+  
+  
+  .home {
+    height: 35vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: bottom center;
+  }
+  
+  .home .welcome-text .name{
+    padding-top: 10%;
+    font-size: 1.4rem;
+  }
+
+  .home .welcome-text p{
+    font-size: 10px;
+  }
+  
+  .home .welcome-text .button-container button {
+    padding: 10px 15px;
+    font-size: 12px;
+  }
+
+  .services h1{
+    padding-top: 20%;
+  }
+
+  .service {
+    padding: 15px 15px;
+  }
+
+  .services .subhead{ 
+    font-size: 12px;
+  }
+
+  .service svg { 
+    padding: 10px;
+  }
+
+  .service h2 {
+    font-size: 14px;
+  }
+
+
   .about {
-    margin: 0px;
+    padding-top: 10%;
   }
   .about .about-container {
     width: 100%;
@@ -376,12 +478,36 @@ nav .navigation ul li .link:hover {
   }
   .about .about-container .about-content p {
     font-size: 12px;
-    padding: 8px 16px;
   }
   .about .about-container .about-img {
     width: 100%;
   }
+  .about .about-container .about-img img {
+    width: 100%;
+    height: 50vh;
+  }
 
+  .contact {
+    padding-top: 10%;
+  }
+
+  .contact h1{
+    margin-bottom: 10%;
+  }
+
+  .contact h1:after{
+    bottom: -10px;
+  }
+
+  .contact .contact-details .contact-info span {
+    font-size: 0.7rem;
+  }
+
+  .contact .contact-details .contact-info svg {
+    padding: 12px 12px;
+  }
+
+  
 }
 
 .animated {
