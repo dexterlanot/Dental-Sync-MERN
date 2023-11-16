@@ -4,6 +4,12 @@ import "../index.css";
 import logo from "../assets/logo.png";
 
 function Navbar() {
+  const handleBookAppointment = () => {
+    const externalLink = "https://bit.ly/49AKv9A";
+
+    window.open(externalLink, "_blank");
+  };
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
