@@ -393,7 +393,7 @@ footer {
   nav .navigation ul {
     position: absolute;
     top: 100%;
-    right: -100%;
+    right: -120%;
     width: 100vw;
     max-height: 100vh; 
     padding: 20px;
