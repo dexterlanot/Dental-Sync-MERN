@@ -310,7 +310,6 @@ nav .navigation ul li .link {
   left: 0;
   height: 100%;
   width: 230px;
-  border-right: 1px solid var(--grey);
   transition: all 0.5s ease;
 }
 
@@ -407,7 +406,6 @@ nav .navigation ul li .link {
   padding: 10px 20px;
   background: linear-gradient(90deg, #135366 50%, #0b6078 100%);
   border-radius: 10px;
-  transition: all 0.5s ease;
 }
 
 .dash-content .greetings h1,
@@ -421,7 +419,7 @@ nav .navigation ul li .link {
   background-color: var(--grey);
   border-radius: 10px;
   line-height: 1.2;
-  transition: all 0.5s ease;
+
 }
 
 .dash-content .clinic-info h4 {
@@ -483,7 +481,6 @@ nav .navigation ul li .link {
   background-color: var(--bluegreen1);
   margin-right: 15px;
   cursor: pointer;
- 
 }
 
 .box i {
@@ -520,7 +517,6 @@ nav .navigation ul li .link {
 }
 
 @media (max-width: 768px) {
-
   .sign-out-button span {
     display: none;
   }
@@ -529,9 +525,19 @@ nav .navigation ul li .link {
     width: 70px;
   }
 
+  .side-bar {
+    width: 70px;
+  }
+
+  .side-bar .link-name,
+  .sidebar-toggle {
+    display: none;
+  }
+
+  .side-bar ~ .overview,
   .side-bar.close ~ .overview {
-    left: 70px;
-    width: calc(100% - 70px);
+    left: 60px;
+    width: calc(100% - 60px);
   }
 
   .dash-content .greetandinfo {
@@ -549,14 +555,10 @@ nav .navigation ul li .link {
     justify-content: flex-start;
   }
 
-  .box i{
+  .box i {
     font-size: 16px;
   }
 
-  .box .text {
-    white-space: wrap;
-    text-align: center;
-  }
 
 }
 
@@ -566,13 +568,13 @@ nav .navigation ul li .link {
   }
 
   .side-bar.close ~ .overview {
-    left: 60px;
-    width: calc(100% - 600px0px);
+    left: 50px;
+    width: calc(100% - 50px);
   }
 
   .box .text {
-    white-space: wrap;
-    font-size: 8px;
+    white-space: pre-wrap;
+    font-size: 9px;
     text-align: center;
   }
 
@@ -581,5 +583,3 @@ nav .navigation ul li .link {
     color: var(--white);
   }
 }
-
-
