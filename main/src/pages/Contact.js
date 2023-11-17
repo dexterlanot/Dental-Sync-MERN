@@ -19,7 +19,7 @@ function Contact() {
           <ul className="contact-info">
             <li>
               <SvgIcons.LocationIcon/>
-              <span>Q2V5+H8P, Makalintal Ave, Poblacion, Bauan, Batangas</span>
+              <span>Makalintal Ave, Poblacion, Bauan, Batangas</span>
             </li>
             <li>
               <SvgIcons.EmailIcon/>

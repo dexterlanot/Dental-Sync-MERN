@@ -38,7 +38,7 @@ function Navbar() {
                       fill="#0B6078"
                     />
                   </svg>
-                  Logout
+                  <span>Logout</span>
                 </button>
               </li>
             </>
