@@ -4,7 +4,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const User = require('./models/userSchema');
+const { User, Transaction, Patient, DentistProfile, Appointment } = require('./models/userSchema');
 const SECRET_KEY = 'secretkey'
 
 const app = express();
@@ -78,3 +78,41 @@ app.post('/login', async (req, res) => {
         res.status(500).json({ error: 'Error logging in' });
     }
 });
+
+// ADD PATIENT with authentication
+app.post('/patients', verifyToken, async (req, res) => {
+    try {
+      const { userId, name, age, dateOfBirth, phoneNumber, email, gender, address } = req.body;
+  
+      if (userId !== req.userId) {
+        return res.status(403).json({ error: 'Forbidden - Invalid user ID' });
+      }
+  
+      const newPatient = new Patient({ userId, name, age, dateOfBirth, phoneNumber, email, gender, address });
+  
+      await newPatient.save();
+  
+      res.status(201).json({ message: 'Patient added successfully' });
+    } catch (error) {
+      console.error('Error adding patient:', error);
+      res.status(500).json({ error: 'Error adding patient' });
+    }
+  });
+  
+  // GET ALL PATIENTS
+  app.get('/patients', verifyToken, async (req, res) => {
+    try {
+      const patients = await Patient.find({ userId: req.userId });
+  
+      res.status(200).json(patients);
+    } catch (error) {
+      console.error('Error fetching patients:', error);
+      res.status(500).json({ error: 'Error fetching patients' });
+    }
+  });
+  
+  // ... (other routes and logic for patient-related operations)
+  
+  app.get('/', (req, res) => {
+    res.send('Welcome to the server!');
+  });

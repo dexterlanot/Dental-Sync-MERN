@@ -1,6 +1,5 @@
 // Dashboard.js
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 
 function Dashboard() {
@@ -67,7 +66,9 @@ function Dashboard() {
                 <span className="text">Total Patients</span>
                 <span className="number"> {'0'} </span>
               </div>
+              
             </div>
+      
           </div>
         </div>
       </div>
