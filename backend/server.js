@@ -8,8 +8,9 @@ const User = require('./models/userSchema');
 const Patient = require('./models/patient')
 const SECRET_KEY = 'secretkey'
 
-const app = express();
 
+const app = express();
+const router = express.Router();
 // MongoDB connection
 const dbURI = 'mongodb+srv://2109401:toothtalksdc@cluster0.khpbpme.mongodb.net/toothtalksdcDB?retryWrites=true&w=majority';
 
@@ -98,7 +99,7 @@ app.post('/patients', async (req, res) => {
   // Read all patients
   app.get('/patients', async (req, res) => {
     try {
-      const patients = await Patient.find();
+      const patients = await Patient.find().sort({ createdAt: -1 });
       res.json(patients);
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -129,5 +130,18 @@ app.post('/patients', async (req, res) => {
     }
   });
 
+// Endpoint to get the total number of patients
+router.get('/patients/count', async (req, res) => {
+  try {
+      const count = await Patient.countDocuments();
+      res.json({ count });
+  } catch (error) {
+      console.error('Error counting patients:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
-  
+// Mount the router on the '/api' path
+app.use('/api', router);
+
+module.exports = app;

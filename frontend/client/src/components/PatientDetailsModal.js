@@ -8,11 +8,11 @@ function PatientDetailsModal({ isOpen, onClose, patientDetails }) {
 
   return (
     <div className="modal-overlay">
-      <div className="modal">
+      <div className="patient-details-modal">
         <span className="close-btn" onClick={onClose}>
           <i className="uil uil-arrow-left"></i>
         </span>
-        <h2>Patient Details</h2>
+        <h2>Patient Information</h2>
         <div className="patient-details">
           <p>
             <strong>Name:</strong>{" "}

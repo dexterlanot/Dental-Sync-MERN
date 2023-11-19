@@ -6,7 +6,7 @@ import EditPatientModal from "../components/EditPatientModal";
 import PatientDetailsModal from "../components/PatientDetailsModal";
 import PatientDelete from "../components/PatientDelete";
 import ReactPaginate from "react-paginate";
-import 'animate.css';
+import "animate.css";
 
 function Patient({ toggleSidebar, isSidebarClosed }) {
   const [patients, setPatients] = useState([]);
@@ -22,6 +22,7 @@ function Patient({ toggleSidebar, isSidebarClosed }) {
   const [editingPatient, setEditingPatient] = useState(null);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     // Fetch all patients on component mount
@@ -85,13 +86,16 @@ function Patient({ toggleSidebar, isSidebarClosed }) {
 
     try {
       // Create a new patient
-      const response = await axios.post("http://localhost:3001/patients", formData);
+      const response = await axios.post(
+        "http://localhost:3001/patients",
+        formData
+      );
 
-         // Create a new array with the new data at the beginning and the rest of the data following it
-    const updatedPatients = [response.data, ...patients];
+      // Create a new array with the new data at the beginning and the rest of the data following it
+      const updatedPatients = [response.data, ...patients];
 
-    // Update the state with the new array
-    setPatients(updatedPatients);
+      // Update the state with the new array
+      setPatients(updatedPatients);
 
       // Reset the form data
       setFormData({
@@ -182,9 +186,10 @@ function Patient({ toggleSidebar, isSidebarClosed }) {
     setIsDetailsModalOpen(true);
   };
 
-    // delete
-    const [patientToDelete, setPatientToDelete] = useState(null);
-  const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] = useState(false);
+  // delete
+  const [patientToDelete, setPatientToDelete] = useState(null);
+  const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] =
+    useState(false);
 
   const handleDeleteConfirmation = (patient) => {
     setPatientToDelete(patient);
@@ -204,19 +209,32 @@ function Patient({ toggleSidebar, isSidebarClosed }) {
     }
   };
 
+  //  search
+  const filteredPatients = patients.filter((patient) => {
+    const fullName = `${patient.fname} ${patient.lname}`.toLowerCase();
+    return (
+      fullName.includes(searchTerm.toLowerCase()) ||
+      patient.age.toString().includes(searchTerm) ||
+      patient.dateOfBirth.toString().includes(searchTerm) ||
+      patient.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      patient.phone.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  });
   // pagination
   const [currentPage, setCurrentPage] = useState(0); // Add this line
   const patientsPerPage = 6;
 
- const indexOfLastPatient = (currentPage + 1) * patientsPerPage;
- const indexOfFirstPatient = currentPage * patientsPerPage;
- const currentPatients = patients.slice(indexOfFirstPatient, indexOfLastPatient);
+  const indexOfLastPatient = (currentPage + 1) * patientsPerPage;
+  const indexOfFirstPatient = currentPage * patientsPerPage;
+  const currentPatients = filteredPatients.slice(
+    indexOfFirstPatient,
+    indexOfLastPatient
+  );
 
- const handlePageChange = ({ selected }) => {
-   setCurrentPage(selected);
- };
+  const handlePageChange = ({ selected }) => {
+    setCurrentPage(selected);
+  };
 
-  
   return (
     <section className={`dashboard ${isSidebarClosed ? "close" : ""}`}>
       <Sidebar
@@ -227,14 +245,26 @@ function Patient({ toggleSidebar, isSidebarClosed }) {
         <i className="uil uil-bars sidebar-toggle" onClick={toggleSidebar}></i>
         <div className="table">
           <div className="table_header">
-            <p className="animate__animated animate__fadeInUp">Patients</p>
-            <button
-              className="add-button"
-              onClick={() => setIsAddModalOpen(true)}
-            >
-              <i className="uil uil-file-plus-alt"></i>
-              Add Patient
-            </button>
+            <p>Patients</p>
+            <div className="header-controls">
+              <div className="search-container">
+                <i class="uil uil-search search-icon"></i>
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  className="patient-search"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+              </div>
+              <button
+                className="add-button"
+                onClick={() => setIsAddModalOpen(true)}
+              >
+                <i className="uil uil-file-plus-alt"></i>
+                Add Patient
+              </button>
+            </div>
           </div>
         </div>
 
@@ -252,19 +282,40 @@ function Patient({ toggleSidebar, isSidebarClosed }) {
             </thead>
             <tbody>
               {currentPatients.map((patient) => (
-                <tr key={patient._id}  className="animate__animated animate__fadeInUp">
-                  <td>
-                  {`${patient.fname} ${patient.lname}`}
-                </td>
+                <tr
+                  key={patient._id}
+                  className="animate__animated animate__fadeInUp"
+                >
+                  <td>{`${patient.fname} ${patient.lname}`}</td>
                   <td className="age">{patient.age}</td>
-                  <td>{new Date(patient.dateOfBirth).toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: 'UTC' })}</td>
+                  <td>
+                    {new Date(patient.dateOfBirth).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "2-digit",
+                      day: "2-digit",
+                      timeZone: "UTC",
+                    })}
+                  </td>
                   <td className="email">{patient.email}</td>
                   <td>{patient.phone}</td>
                   <td className="action">
-                    <button className="action info" onClick={() => handlePatientDetailsClick(patient)}><i class="uil uil-info"></i></button>
-                    <button className="action edit" onClick={() => handleEdit(patient)}><i class="uil uil-pen"></i></button>
-                    <button className="action delete" onClick={() => handleDeleteConfirmation(patient)}>
-                    <i class="uil uil-trash-alt"></i>
+                    <button
+                      className="action info"
+                      onClick={() => handlePatientDetailsClick(patient)}
+                    >
+                      <i class="uil uil-info"></i>
+                    </button>
+                    <button
+                      className="action edit"
+                      onClick={() => handleEdit(patient)}
+                    >
+                      <i class="uil uil-pen"></i>
+                    </button>
+                    <button
+                      className="action delete"
+                      onClick={() => handleDeleteConfirmation(patient)}
+                    >
+                      <i class="uil uil-trash-alt"></i>
                     </button>
                   </td>
                 </tr>
@@ -272,17 +323,17 @@ function Patient({ toggleSidebar, isSidebarClosed }) {
             </tbody>
           </table>
           <ReactPaginate
-          previousLabel={"previous"}
-          nextLabel={"next"}
-          breakLabel={"..."}
-          breakClassName={"break-me"}
-          pageCount={Math.ceil(patients.length / patientsPerPage)}
-          marginPagesDisplayed={2}
-          pageRangeDisplayed={5}
-          onPageChange={handlePageChange}
-          containerClassName={"pagination"}
-          activeClassName={"active"}
-        />
+            previousLabel={"previous"}
+            nextLabel={"next"}
+            breakLabel={"..."}
+            breakClassName={"break-me"}
+            pageCount={Math.ceil(filteredPatients.length / patientsPerPage)}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={5}
+            onPageChange={handlePageChange}
+            containerClassName={"pagination"}
+            activeClassName={"active"}
+          />
           <NewPatientModal
             isOpen={isAddModalOpen}
             onClose={() => setIsAddModalOpen(false)}
@@ -298,18 +349,18 @@ function Patient({ toggleSidebar, isSidebarClosed }) {
             onInputChange={handleInputChange}
           />
           <PatientDetailsModal
-          isOpen={isDetailsModalOpen}
-          onClose={() => setIsDetailsModalOpen(false)}
-          patientDetails={selectedPatientDetails}
-        />
-        {isDeleteConfirmationOpen && (
-          <PatientDelete
-            title="Confirm Deletion"
-            message="Are you sure you want to delete this patient?"
-            onCancel={handleDeleteCancel}
-            onConfirm={handleDeleteConfirm}
+            isOpen={isDetailsModalOpen}
+            onClose={() => setIsDetailsModalOpen(false)}
+            patientDetails={selectedPatientDetails}
           />
-        )}
+          {isDeleteConfirmationOpen && (
+            <PatientDelete
+              title="Confirm Deletion"
+              message="Are you sure you want to delete this patient?"
+              onCancel={handleDeleteCancel}
+              onConfirm={handleDeleteConfirm}
+            />
+          )}
         </div>
       </div>
     </section>

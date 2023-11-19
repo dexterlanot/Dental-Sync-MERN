@@ -1,10 +1,12 @@
 // Dashboard.js
 import React, { useState, useEffect } from "react";
 import Sidebar from "../components/Sidebar";
+import axios from "axios";
 import 'animate.css';
 
 function Dashboard() {
   const [isSidebarClosed, setSidebarClosed] = useState(false);
+  const [numberOfPatients, setNumberOfPatients] = useState(0);
 
   const toggleSidebar = () => {
     setSidebarClosed(!isSidebarClosed);
@@ -22,7 +24,20 @@ function Dashboard() {
     } else {
       setGreeting("Good evening, ");
     }
+
+    fetchNumberOfPatients();
+
   }, []);
+
+  const fetchNumberOfPatients = async () => {
+    try {
+      const response = await axios.get("http://localhost:3001/api/patients/count");
+      console.log("Number of patients:", response.data.count); // Log the count
+      setNumberOfPatients(response.data.count);
+    } catch (error) {
+      console.error("Error fetching number of patients:", error);
+    }
+  };
 
   return (
     <section className={`dashboard ${isSidebarClosed ? "close" : ""}`}>
@@ -65,7 +80,7 @@ function Dashboard() {
               <div className="box box3 animate__animated animate__zoomIn">
                 <i className="uil uil-user"></i>
                 <span className="text">Total Patients</span>
-                <span className="number"> {'0'} </span>
+                <span className="number"> {numberOfPatients} </span>
               </div>
               
             </div>

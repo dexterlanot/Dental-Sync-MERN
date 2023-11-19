@@ -650,6 +650,41 @@ td {
   background-color: var(--grey);
 }
 
+/* .patient-search {
+  width: 58%;
+  outline: none;
+  border-radius: 5px;
+  border: 1px solid var(--bluegreen2);
+  padding: 6px 15px;
+} */
+
+.header-controls {
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px; /* Adjust the left position as needed */
+  font-size: 18px;
+  color: var(--bluegreen2);
+}
+
+.patient-search {
+  width: 95%;
+  padding: 6px 30px 6px 30px; /* Adjust the padding as needed */
+  outline: none;
+  border-radius: 5px;
+  border: 1px solid var(--bluegreen2);
+}
+
 /* pagination */
 .pagination {
   position: fixed;
@@ -682,7 +717,7 @@ td {
   outline: none;
   border: none;
   border-radius: 6px;
-  padding: 10px 15px;
+  padding: 6px 15px;
   cursor: pointer;
   background-color: var(--bluegreen2);
   color: var(--white);
@@ -833,4 +868,68 @@ td {
 
 .newpatient .gender-options input {
   margin-right: 5px;
+}
+
+.patient-details-modal, .delete-modal {
+  position: absolute;
+  z-index: 101;
+  max-width: 400px;
+  width: 70%;
+  background: var(--white);
+  padding: 30px;
+  border-radius: 20px;
+  box-sizing: border-box;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+
+.patient-details-modal h2 {
+  font-weight: 500;
+  margin-left: 10px;
+  color: var(--bluegreen2);
+  display: inline-block;
+  vertical-align: middle; 
+}
+
+.delete-modal h2 {
+  font-weight: 500;
+  color: var(--bluegreen2);
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.patient-details-modal .patient-details  {
+  margin-top: 20px;
+}
+
+.patient-details-modal .patient-details p, .delete-modal p{
+  font-size: 14px;
+}
+
+.modal-buttons {
+  margin-top: 20px; 
+  display: flex;
+  justify-content: center;
+}
+
+.modal-buttons .confirm-btn {
+  background-color: var(--bluegreen2);
+  color: var(--white);
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  text-align: center;
+  font-size: 14px;
+}
+
+.modal-buttons .cancel-btn {
+  margin-left: 10px;
+  background-color: var(--black-light-color);
+  color: var(--grey);
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  text-align: center;
+  font-size: 14px;
 }
