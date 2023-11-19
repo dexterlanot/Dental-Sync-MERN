@@ -4,7 +4,8 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { User, Transaction, Patient, DentistProfile, Appointment } = require('./models/userSchema');
+const User = require('./models/userSchema');
+const Patient = require('./models/patient')
 const SECRET_KEY = 'secretkey'
 
 const app = express();
@@ -79,40 +80,54 @@ app.post('/login', async (req, res) => {
     }
 });
 
-// ADD PATIENT with authentication
-app.post('/patients', verifyToken, async (req, res) => {
-    try {
-      const { userId, name, age, dateOfBirth, phoneNumber, email, gender, address } = req.body;
-  
-      if (userId !== req.userId) {
-        return res.status(403).json({ error: 'Forbidden - Invalid user ID' });
-      }
-  
-      const newPatient = new Patient({ userId, name, age, dateOfBirth, phoneNumber, email, gender, address });
-  
+// Create a new patient
+app.post('/patients', async (req, res) => {
+  try {
+      console.log('Received patient data:', req.body); // Log received data
+      const newPatient = new Patient(req.body);
       await newPatient.save();
+      console.log('Patient saved successfully:', newPatient); // Log successful save
+      res.json(newPatient);
+  } catch (error) {
+      console.error('Error creating patient:', error);
+      res.status(500).json({ error: error.message });
+  }
+});
+
   
-      res.status(201).json({ message: 'Patient added successfully' });
-    } catch (error) {
-      console.error('Error adding patient:', error);
-      res.status(500).json({ error: 'Error adding patient' });
-    }
-  });
-  
-  // GET ALL PATIENTS
-  app.get('/patients', verifyToken, async (req, res) => {
+  // Read all patients
+  app.get('/patients', async (req, res) => {
     try {
-      const patients = await Patient.find({ userId: req.userId });
-  
-      res.status(200).json(patients);
+      const patients = await Patient.find();
+      res.json(patients);
     } catch (error) {
-      console.error('Error fetching patients:', error);
-      res.status(500).json({ error: 'Error fetching patients' });
+      res.status(500).json({ error: error.message });
     }
   });
   
-  // ... (other routes and logic for patient-related operations)
-  
-  app.get('/', (req, res) => {
-    res.send('Welcome to the server!');
+  // Update a patient by ID
+  app.put('/patients/:id', async (req, res) => {
+    try {
+      const updatedPatient = await Patient.findByIdAndUpdate(
+        req.params.id,
+        req.body,
+        { new: true }
+      );
+      res.json(updatedPatient);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
   });
+  
+  // Delete a patient by ID
+  app.delete('/patients/:id', async (req, res) => {
+    try {
+      const deletedPatient = await Patient.findByIdAndDelete(req.params.id);
+      res.json(deletedPatient);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+
+  

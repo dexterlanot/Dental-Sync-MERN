@@ -1,6 +1,7 @@
 // Dashboard.js
 import React, { useState, useEffect } from "react";
 import Sidebar from "../components/Sidebar";
+import 'animate.css';
 
 function Dashboard() {
   const [isSidebarClosed, setSidebarClosed] = useState(false);
@@ -26,14 +27,14 @@ function Dashboard() {
   return (
     <section className={`dashboard ${isSidebarClosed ? "close" : ""}`}>
       <Sidebar isSidebarClosed={isSidebarClosed} toggleSidebar={toggleSidebar} />
-      <div className="overview" id="overview">
+      <div className="overview " id="overview">
         <i className="uil uil-bars sidebar-toggle" onClick={toggleSidebar}></i>
         <div className="dash-content">
           <div className="overview-content">
             <div className="greetandinfo">
               <div className="greetings">
-                <h1>{greeting} Dr. {'{Name here}'} </h1>
-                <p>Tooth Talks Dental Clinic</p>
+                <h1 className="animate__animated animate__fadeInUp">{greeting} Dr. {'{Name here}'} </h1>
+                <p className="animate__animated animate__fadeInUp">Tooth Talks Dental Clinic</p>
               </div>
               <div className="clinic-info">
                 <h4> Clinic Information </h4>
@@ -50,18 +51,18 @@ function Dashboard() {
               <span className="text">Overview</span>
             </div>
 
-            <div className="boxes">
-              <div className="box box1">
+            <div className="boxes ">
+              <div className="box box1 animate__animated animate__zoomIn">
                 <i className="uil uil-clipboard-notes"></i>
                 <span className="text">Today's Appointments</span>
                 <span className="number"> {'0'} </span>
               </div>
-              <div className="box box2">
+              <div className="box box2 animate__animated animate__zoomIn">
                 <i className="uil uil-arrow-to-right"></i>
                 <span className="text">Upcoming Appointments</span>
                 <span className="number"> {'0'} </span>
               </div>
-              <div className="box box3">
+              <div className="box box3 animate__animated animate__zoomIn">
                 <i className="uil uil-user"></i>
                 <span className="text">Total Patients</span>
                 <span className="number"> {'0'} </span>

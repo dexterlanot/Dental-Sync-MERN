@@ -66,7 +66,7 @@ nav .navigation ul li .link {
   display: flex;
   align-items: center;
   color: var(--bluegreen2);
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 400;
   letter-spacing: 0.5px;
   padding: 10px 12px;
@@ -254,7 +254,7 @@ nav .navigation ul li .link {
   margin-left: 10px;
   border-radius: 10px;
   border: none;
-  width: 85%;
+  width: 90%;
   height: 100%;
 }
 
@@ -559,7 +559,6 @@ nav .navigation ul li .link {
     font-size: 16px;
   }
 
-
 }
 
 @media (max-width: 600px) {
@@ -584,7 +583,7 @@ nav .navigation ul li .link {
   }
 }
 
-/* appointment part here */
+/* table here */
 
 .table_header {
   display: flex;
@@ -608,12 +607,12 @@ table {
   width: 97%;
   table-layout: fixed;
   margin: 20px;
-  border-collapse: collapse;
+
+  /* border-collapse: collapse; */
 }
 
 thead th {
   position: sticky;
-  background-color: var(--grey);
   color: var(--darkgrey);
   font-size: 14px;
   font-weight: 500;
@@ -622,14 +621,61 @@ thead th {
 th, td {
   border-bottom: 1px solid var(--grey);
   padding: 10px 20px;
-  word-break: break-all;
-  text-align: center;
+  font-size: 12px;
+  text-align: left;
 }
 
 tr:hover td {
   color: var(--bluegreen2);
-  cursor: pointer;
+}
+
+thead th.age,
+td.age {
+  width: 70px;
+}
+
+thead th.email,
+td.email {
+  width: 250px;
+}
+
+thead th.action,
+td.action {
+  width: 150px;
+  text-align: center;
+}
+
+
+td {
   background-color: var(--grey);
+}
+
+/* pagination */
+.pagination {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  list-style: none;
+}
+
+.pagination li {
+  margin-right: 5px;
+}
+
+.pagination a {
+  text-decoration: none;
+  color: var(--black-light-color);
+  cursor: pointer;
+  padding: 3px 10px;
+  font-size: 12px;
+  border-radius: 5px;
+}
+
+.pagination .active a {
+  background-color: var(--bluegreen2);
+  color: var(--white);
 }
 
 .add-button {
@@ -647,78 +693,144 @@ tr:hover td {
   font-size: 15px;
 }
 
+.action.edit, .action.delete, .action.info {
+  outline: none;
+  border: none;
+  border-radius: 6px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+
+.action i {
+  font-size: 16px;
+}
+
+.action.delete {
+  background-color: #eb7873;
+  color: var(--white);
+  padding: 2px 5px;
+  margin-left: 5px;
+}
+
+.action.edit {
+  background-color: #fcb55b;
+  color: var(--white);
+  padding: 2px 5px;
+  margin-left: 5px;
+}
+
+.action.info {
+  background-color: #61b0a5;
+  color: var(--white);
+  padding: 2px 5px;
+  margin-left: 5px;
+}
+
+
 /* modal */
-/* patient form modal */
 .modal-overlay {
+  z-index: 101;
   position: fixed;
   top: 0;
   left: 0;
+  min-height: 100vh;
   width: 100%;
-  height: 100%;
   background: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.appointment-form-modal,
-.patient-form-modal {
-  background: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  max-width: 400px; /* Adjust the width as needed */
-  width: 100%;
-}
-
-.appointment-form-modal form,
-.patient-form-modal form {
-  display: grid;
-  align-items: center;
-  gap: 10px;
-  grid-template-columns: 1fr 1fr; /* Two columns for two inputs */
-}
-
-.appointment-form-modal label,
-.patient-form-modal label {
-  font-weight: 500;
-}
-
-/* Adjust the width for the input fields to fit side by side */
-.appointment-form-modal input,
-.appointment-form-modal select,
-.patient-form-modal input,
-.patient-form-modal select,
-.patient-form-modal textarea {
-  width: 100%; /* Take up full width of the column */
+.modal {
+  position: absolute;
+  z-index: 101;
+  max-width: 700px;
+  width: 70%;
+  background: var(--white);
+  padding: 30px;
+  border-radius: 20px;
   box-sizing: border-box;
-  border: 1px solid #ccc;
-  padding: 10px 15px;
-  border-radius: 4px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
 }
 
-/* Additional styling for the button */
-.appointment-form-modal button,
-.patient-form-modal button {
+.modal h2 {
+  font-weight: 500;
+  margin-left: 10px;
+  color: var(--bluegreen2);
   display: inline-block;
-  width: 48%; /* Adjust the width as needed */
-  margin-right: 4%; /* Adjust the margin as needed */
-  background-color: #28a745;
-  color: #fff;
-  border: none;
+  vertical-align: middle; 
+}
+
+.close-btn i {
+  padding: 3px;
+  color: var(--bluegreen2);
   cursor: pointer;
-  border-radius: 4px;
+  font-size: 20px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: auto;
 }
 
-.appointment-form-modal button:last-child,
-.patient-form-modal button:last-child {
-  background-color: #dc3545;
-  margin-left: 4%; /* Adjust the margin as needed */
+.newpatient {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
-.appointment-form-modal button:hover,
-.appointment-form-modal button:last-child:hover,
-.patient-form-modal button:hover,
-.patient-form-modal button:last-child:hover {
-  filter: brightness(90%);
+.newpatient .form__group {
+  margin: 10px 0 6px 0;
+  width: calc(100% / 2 - 20px);
+}
+
+.newpatient label {
+  font-size: 14px;
+  color: var(--black-light-color);
+  margin-bottom: 5px;
+  display: block;
+}
+
+.newpatient input,
+.newpatient textarea {
+  width: 100%;
+  outline: none;
+  border-radius: 5px;
+  border: 1px solid var(--grey);
+  padding: 8px 15px;
+  height: 40px;
+}
+
+.newpatient textarea {
+  resize: vertical;
+}
+
+.newpatient button {
+  background-color: var(--bluegreen2);
+  color: var(--white);
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  text-align: center;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.newpatient button:hover {
+  background-color: var(--bluegreen1);
+}
+
+.newpatient .gender-options {
+  display: flex;
+  margin-top: 5px;
+}
+
+.newpatient .gender-options label {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.newpatient .gender-options input {
+  margin-right: 5px;
 }

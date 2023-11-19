@@ -27,7 +27,7 @@ function Sidebar({ isSidebarClosed, toggleSidebar }) {
           <li>
             <NavLink to="/ledger" className="side-bar-link" >
               <i className="uil uil-transaction"></i>
-              <span className="link-name"> Ledger </span>
+              <span className="link-name"> Transactions </span>
             </NavLink>
           </li>
           <li>
