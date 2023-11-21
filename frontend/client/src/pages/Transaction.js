@@ -179,9 +179,10 @@ function Transaction({ toggleSidebar, isSidebarClosed }) {
         isSidebarClosed={isSidebarClosed}
         toggleSidebar={toggleSidebar}
       />
-
-      <div className="overview" id="overview">
+      <div className="bar-toggle">
         <i className="uil uil-bars sidebar-toggle" onClick={toggleSidebar}></i>
+      </div>
+      <div className="overview" id="overview">
         <div className="table">
           <div className="table_header">
             <p>Transaction Records</p>

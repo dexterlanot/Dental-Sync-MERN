@@ -7,31 +7,31 @@ function Sidebar({ isSidebarClosed, toggleSidebar }) {
       <div className="menu-items">
         <ul className="side-bar-links">
           <li>
-            <NavLink to="/dashboard" className="side-bar-link" >
+            <NavLink to="/dashboard" className="side-bar-link"activeClassName="active" >
               <i className="uil uil-apps"></i>
               <span className="link-name"> Overview </span>
             </NavLink>
           </li>
           <li>
-            <NavLink to="/appointment" className="side-bar-link" >
+            <NavLink to="/appointment" className="side-bar-link" activeClassName="active">
               <i className="uil uil-schedule"></i>
               <span className="link-name"> Appointments </span>
             </NavLink>
           </li>
           <li>
-            <NavLink to="/patient" className="side-bar-link" >
+            <NavLink to="/patient" className="side-bar-link" activeClassName="active">
               <i className="uil uil-users-alt"></i>
               <span className="link-name"> Patient</span>
             </NavLink>
           </li>
           <li>
-            <NavLink to="/transaction" className="side-bar-link" >
+            <NavLink to="/transaction" className="side-bar-link" activeClassName="active">
               <i className="uil uil-transaction"></i>
               <span className="link-name"> Transactions </span>
             </NavLink>
           </li>
           <li>
-            <NavLink to="/profile" className="side-bar-link profile" >
+            <NavLink to="/profile" className="side-bar-link profile" activeClassName="active">
               <i className="uil uil-user-md"></i>
               <span className="link-name"> Profile </span>
             </NavLink>

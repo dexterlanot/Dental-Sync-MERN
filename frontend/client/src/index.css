@@ -337,13 +337,29 @@ nav .navigation ul li .link {
   position: relative;
 }
 
-.side-bar .menu-items li .side-bar-link:hover:before {
+.side-bar .menu-items li .side-bar-link.active i,
+.side-bar .menu-items li .side-bar-link.active .link-name {
+  color: var(--bluegreen2);
+}
+
+.side-bar .menu-items li .side-bar-link.active:before {
   content: "";
   position: absolute;
   height: 5px;
   width: 5px;
   border-radius: 50%;
   background-color: var(--bluegreen2);
+  transition: all 0.5s ease;
+}
+
+.side-bar .menu-items li .side-bar-link:hover:before {
+  content: "";
+  position: absolute;
+  height: 5px;
+  width: 5px;
+  border-radius: 50%;
+  background-color: var(--black-light-color);
+  transition: all 0.5s ease;
 }
 
 .side-bar .menu-items li .side-bar-link i {
@@ -370,7 +386,7 @@ nav .navigation ul li .link {
 
 .side-bar .side-bar-link:hover .uil,
 .side-bar .side-bar-link:hover .link-name {
-  color: var(--bluegreen2);
+  color: var(--black-light-color);
 }
 
 .dashboard .overview {
@@ -501,7 +517,7 @@ nav .navigation ul li .link {
   flex-direction: column;
   border-radius: 12px;
   width: calc(100% / 3 - 9px);
-  padding: 10px 20px;
+  padding: 12px 20px;
   background-color: var(--bluegreen1);
   margin-right: 20px;
   cursor: pointer;

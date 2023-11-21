@@ -16,7 +16,7 @@ function EditTransactionModal({
           <i className="uil uil-arrow-left"></i>
         </span>
         <h2>Edit Transaction</h2>
-        <form className="edittransaction" onSubmit={onFormSubmit}>
+        <form className="newpatient" onSubmit={onFormSubmit}>
           <div className="form__group">
             <label>Date:</label>{" "}
             <input
