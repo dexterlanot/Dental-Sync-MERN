@@ -38,7 +38,7 @@ nav {
 nav img {
   width: 150px;
   padding-top: 5px;
-  margin: 10px;
+  margin: 10px 0 10px 15px;
 }
 
 nav .navigation ul {
@@ -379,13 +379,19 @@ nav .navigation ul li .link {
   position: relative;
   left: 230px;
   height: 100vh;
-  width: calc(100% - 230px);
+  width: calc(99% - 230px);
   transition: all 0.5s ease;
 }
 
-.dashboard .overview .sidebar-toggle {
-  margin-left: 5px;
-  color: var(--darkgrey);
+.bar-toggle {
+  position: absolute;
+  z-index: 5;
+  margin-left: 15px;
+  margin-top: 20px;
+}
+
+.sidebar-toggle {
+  color: var(--black-light-color);
   font-size: 20px;
   cursor: pointer;
 }
@@ -397,13 +403,13 @@ nav .navigation ul li .link {
 
 .dash-content .greetandinfo {
   display: flex;
-  margin: 20px;
+  margin: 10px 20px;
 }
 
 .dash-content .greetings {
   width: 60%;
   margin-right: 20px;
-  padding: 10px 20px;
+  padding: 20px 20px;
   background: linear-gradient(90deg, #135366 50%, #0b6078 100%);
   border-radius: 10px;
 }
@@ -419,7 +425,6 @@ nav .navigation ul li .link {
   background-color: var(--grey);
   border-radius: 10px;
   line-height: 1.2;
-
 }
 
 .dash-content .clinic-info h4 {
@@ -439,7 +444,8 @@ nav .navigation ul li .link {
   padding: 5px;
 }
 
-.dash-content .title {
+.dash-content .title,
+.table-title {
   display: flex;
   align-items: center;
   margin: 0 20px;
@@ -458,8 +464,27 @@ nav .navigation ul li .link {
   font-size: 24px;
 }
 
+.table-title i {
+  position: relative;
+  height: 25px;
+  width: 25px;
+  background-color: var(--grey);
+  border-radius: 10px;
+  color: var(--bluegreen2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
 .dash-content .title .text {
   font-size: 20px;
+  font-weight: 500;
+  margin-left: 10px;
+}
+
+.table-title .text {
+  font-size: 15px;
   font-weight: 500;
   margin-left: 10px;
 }
@@ -474,26 +499,59 @@ nav .navigation ul li .link {
 .dash-content .boxes .box {
   display: flex;
   flex-direction: column;
-  align-items: center;
   border-radius: 12px;
   width: calc(100% / 3 - 9px);
-  padding: 15px 20px;
+  padding: 10px 20px;
   background-color: var(--bluegreen1);
-  margin-right: 15px;
+  margin-right: 20px;
   cursor: pointer;
 }
 
+.box .icon {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .box i {
-  font-size: 30px;
+  font-size: 20px;
   color: var(--white);
+  padding: 5px 10px;
+  border-radius: 20px;
+  background: var(--bluegreen2);
+}
+
+.box2 i {
+  font-size: 20px;
+  padding: 5px 10px;
+  border-radius: 20px;
+  background: #ed9e37;
+  margin-right: 2px;
+}
+
+.box3 i {
+  font-size: 20px;
+  padding: 5px 10px;
+  border-radius: 20px;
+  background: #ec7672;
+  margin-right: 2px;
+}
+
+.box4 i {
+  font-size: 20px;
+  padding: 5px 10px;
+  border-radius: 20px;
+  background: var(--black-light-color);
+  margin-right: 2px;
 }
 
 .box .text {
   white-space: nowrap;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   color: var(--white);
   transition: all 0.5s ease;
+  line-height: 1.2;
 }
 
 .box .number {
@@ -502,18 +560,30 @@ nav .navigation ul li .link {
   color: var(--white);
 }
 
-.boxes .box.box2,
-.boxes .box.box3 {
-  background-color: var(--grey);
+/* .boxes .box.box2,
+.boxes .box.box3,
+.boxes .box.box4 {
+} */
+
+.boxes .box.box2 {
+  background-color: #f7b25f;
 }
 
-.boxes .box.box2 i,
+.boxes .box.box3 {
+  background-color: #fa8686;
+}
+
+.boxes .box.box4 {
+  background-color: var(--darkgrey);
+}
+
 .boxes .box.box2 .text,
 .boxes .box.box2 .number,
-.boxes .box.box3 i,
 .boxes .box.box3 .text,
-.boxes .box.box3 .number {
-  color: var(--bluegreen2);
+.boxes .box.box3 .number,
+.boxes .box.box4 .text,
+.boxes .box.box4 .number {
+  color: var(--white);
 }
 
 @media (max-width: 768px) {
@@ -558,7 +628,6 @@ nav .navigation ul li .link {
   .box i {
     font-size: 16px;
   }
-
 }
 
 @media (max-width: 600px) {
@@ -611,6 +680,12 @@ table {
   /* border-collapse: collapse; */
 }
 
+.pending-table {
+  width: 97%;
+  table-layout: fixed;
+  margin: 10px 20px;
+}
+
 thead th {
   position: sticky;
   color: var(--darkgrey);
@@ -618,9 +693,25 @@ thead th {
   font-weight: 500;
 }
 
-th, td {
+.pending-table thead th {
+  position: sticky;
+  color: var(--darkgrey);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+th,
+td {
   border-bottom: 1px solid var(--grey);
   padding: 10px 20px;
+  font-size: 12px;
+  text-align: left;
+}
+
+.pending-table th,
+td {
+  border-bottom: 1px solid var(--grey);
+  padding: 8px 20px;
   font-size: 12px;
   text-align: left;
 }
@@ -631,23 +722,71 @@ tr:hover td {
 
 thead th.age,
 td.age {
-  width: 70px;
+  width: 80px;
+}
+
+thead th.amount,
+td.amount,
+thead th.transac-status,
+td.transac-status, {
+  width: 30px;
+}
+
+thead th.dob,
+td.dob,
+thead th.phone,
+td.phone {
+  width: 180px;
 }
 
 thead th.email,
 td.email {
-  width: 250px;
+  width: 230px;
+}
+
+thead th.treatment-type,
+td.treatment-type {
+  width: 200px;
+}
+
+thead th.name,
+td.name {
+  width: 200px;
 }
 
 thead th.action,
-td.action {
+td.action,
+td.status,
+td.transac-status {
   width: 150px;
   text-align: center;
 }
 
+thead th.action-transac,
+td.action-transac {
+  width: 140px;
+}
 
 td {
   background-color: var(--grey);
+}
+
+.status-text {
+  padding: 2px 15px;
+  border-radius: 10px;
+  color: var(--white);
+}
+
+.status-text.pending {
+  background-color: #ffb55a;
+}
+
+.status-text.paid {
+  background-color: var(--bluegreen1);
+}
+
+.status-text.completed {
+  background-color: var(--bluegreen1);
 }
 
 /* .patient-search {
@@ -661,7 +800,6 @@ td {
 .header-controls {
   display: flex;
   justify-content: space-between;
-
 }
 
 .search-container {
@@ -688,15 +826,11 @@ td {
 /* pagination */
 .pagination {
   position: fixed;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 25px;
+  transform: translateX(30%);
   display: flex;
+  justify-content: flex-end;
   list-style: none;
-}
-
-.pagination li {
-  margin-right: 5px;
 }
 
 .pagination a {
@@ -728,14 +862,15 @@ td {
   font-size: 15px;
 }
 
-.action.edit, .action.delete, .action.info {
+.action.edit,
+.action.delete,
+.action.info {
   outline: none;
   border: none;
   border-radius: 6px;
   padding: 5px;
   cursor: pointer;
 }
-
 
 .action i {
   font-size: 16px;
@@ -762,7 +897,6 @@ td {
   margin-left: 5px;
 }
 
-
 /* modal */
 .modal-overlay {
   z-index: 101;
@@ -786,15 +920,30 @@ td {
   padding: 30px;
   border-radius: 20px;
   box-sizing: border-box;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
 }
 
-.modal h2 {
+.modal-appointment {
+  position: absolute;
+  z-index: 101;
+  max-width: 500px;
+  width: 70%;
+  background: var(--white);
+  padding: 30px;
+  border-radius: 20px;
+  box-sizing: border-box;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+
+.modal h2,
+.modal-appointment h2 {
   font-weight: 500;
   margin-left: 10px;
   color: var(--bluegreen2);
   display: inline-block;
-  vertical-align: middle; 
+  vertical-align: middle;
 }
 
 .close-btn i {
@@ -813,12 +962,25 @@ td {
   justify-content: space-between;
 }
 
+.newappointment {
+  display: flex;
+  flex-direction: column; /* Change to column */
+  justify-content: center; /* Change to center */
+  align-items: center;
+}
+
 .newpatient .form__group {
   margin: 10px 0 6px 0;
   width: calc(100% / 2 - 20px);
 }
 
-.newpatient label {
+.newappointment .form__group {
+  margin: 10px 0 6px 0;
+  width: calc(100% - 30px);
+}
+
+.newpatient label,
+.newappointment label {
   font-size: 14px;
   color: var(--black-light-color);
   margin-bottom: 5px;
@@ -826,7 +988,11 @@ td {
 }
 
 .newpatient input,
-.newpatient textarea {
+.newpatient textarea,
+.newpatient select,
+.newappointment input,
+.newappointment textarea,
+.newappointment select {
   width: 100%;
   outline: none;
   border-radius: 5px;
@@ -851,7 +1017,21 @@ td {
   transition: background-color 0.3s ease;
 }
 
-.newpatient button:hover {
+.newappointment button {
+  margin-top: 10px;
+  background-color: var(--bluegreen2);
+  color: var(--white);
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  text-align: center;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.newpatient button:hover,
+.newappointment button:hover {
   background-color: var(--bluegreen1);
 }
 
@@ -870,7 +1050,8 @@ td {
   margin-right: 5px;
 }
 
-.patient-details-modal, .delete-modal {
+.patient-details-modal,
+.delete-modal {
   position: absolute;
   z-index: 101;
   max-width: 400px;
@@ -879,7 +1060,8 @@ td {
   padding: 30px;
   border-radius: 20px;
   box-sizing: border-box;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
 }
 
 .patient-details-modal h2 {
@@ -887,7 +1069,7 @@ td {
   margin-left: 10px;
   color: var(--bluegreen2);
   display: inline-block;
-  vertical-align: middle; 
+  vertical-align: middle;
 }
 
 .delete-modal h2 {
@@ -897,16 +1079,18 @@ td {
   vertical-align: middle;
 }
 
-.patient-details-modal .patient-details  {
+.patient-details-modal .patient-details {
   margin-top: 20px;
 }
 
-.patient-details-modal .patient-details p, .delete-modal p{
+.patient-details-modal .patient-details p,
+.delete-modal p {
   font-size: 14px;
+  margin-bottom: 5px;
 }
 
 .modal-buttons {
-  margin-top: 20px; 
+  margin-top: 20px;
   display: flex;
   justify-content: center;
 }

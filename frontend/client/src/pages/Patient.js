@@ -222,7 +222,7 @@ function Patient({ toggleSidebar, isSidebarClosed }) {
   });
   // pagination
   const [currentPage, setCurrentPage] = useState(0); // Add this line
-  const patientsPerPage = 6;
+  const patientsPerPage = 7;
 
   const indexOfLastPatient = (currentPage + 1) * patientsPerPage;
   const indexOfFirstPatient = currentPage * patientsPerPage;
@@ -272,11 +272,11 @@ function Patient({ toggleSidebar, isSidebarClosed }) {
           <table>
             <thead>
               <tr>
-                <th>Name</th>
+                <th className="name">Name</th>
                 <th className="age">Age</th>
-                <th>Date of Birth</th>
+                <th className="dob">Date of Birth</th>
                 <th className="email">Email</th>
-                <th>Phone</th>
+                <th className="phone">Phone</th>
                 <th className="action">Action</th>
               </tr>
             </thead>
@@ -286,9 +286,9 @@ function Patient({ toggleSidebar, isSidebarClosed }) {
                   key={patient._id}
                   className="animate__animated animate__fadeInUp"
                 >
-                  <td>{`${patient.fname} ${patient.lname}`}</td>
+                  <td  className="name">{`${patient.fname} ${patient.lname}`}</td>
                   <td className="age">{patient.age}</td>
-                  <td>
+                  <td className="dob">
                     {new Date(patient.dateOfBirth).toLocaleDateString("en-US", {
                       year: "numeric",
                       month: "2-digit",
@@ -297,7 +297,7 @@ function Patient({ toggleSidebar, isSidebarClosed }) {
                     })}
                   </td>
                   <td className="email">{patient.email}</td>
-                  <td>{patient.phone}</td>
+                  <td className="phone">{patient.phone}</td>
                   <td className="action">
                     <button
                       className="action info"
@@ -323,15 +323,15 @@ function Patient({ toggleSidebar, isSidebarClosed }) {
             </tbody>
           </table>
           <ReactPaginate
-            previousLabel={"previous"}
-            nextLabel={"next"}
+            previousLabel={<i class="uil uil-previous"></i>}
+            nextLabel={<i class="uil uil-step-forward"></i>}
             breakLabel={"..."}
             breakClassName={"break-me"}
             pageCount={Math.ceil(filteredPatients.length / patientsPerPage)}
             marginPagesDisplayed={2}
             pageRangeDisplayed={5}
             onPageChange={handlePageChange}
-            containerClassName={"pagination"}
+            containerClassName={"pagination animate__animated animate__fadeInUp"}
             activeClassName={"active"}
           />
           <NewPatientModal

@@ -8,7 +8,7 @@ import Signup from "./pages/Signup";
 import Navbar from "./components/Navbar";
 import Appointment from "./pages/Appointment";
 import Patient from "./pages/Patient";
-import Ledger from "./pages/Ledger";
+import Transaction from "./pages/Transaction";
 import Profile from "./pages/Profile";
 import "./index.css";
 import "./App.css";
@@ -46,8 +46,8 @@ function App() {
                   element={<Patient toggleSidebar={toggleSidebar} isSidebarClosed={isSidebarClosed} />}
                 />
                 <Route
-                  path="/ledger"
-                  element={<Ledger toggleSidebar={toggleSidebar} isSidebarClosed={isSidebarClosed} />}
+                  path="/transaction"
+                  element={<Transaction toggleSidebar={toggleSidebar} isSidebarClosed={isSidebarClosed} />}
                 />
                 <Route
                   path="/profile"

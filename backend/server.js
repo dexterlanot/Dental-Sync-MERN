@@ -6,6 +6,8 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('./models/userSchema');
 const Patient = require('./models/patient')
+const Appointment = require('./models/appointment');
+const Transaction = require('./models/transaction');
 const SECRET_KEY = 'secretkey'
 
 
@@ -140,6 +142,124 @@ router.get('/patients/count', async (req, res) => {
       res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
+//apointment
+// Create a new appointment
+app.post('/appointments', async (req, res) => {
+  try {
+    console.log('Received appointment data:', req.body); // Log received data
+    const newAppointment = new Appointment(req.body);
+    await newAppointment.save();
+    console.log('Appointment saved successfully:', newAppointment); // Log successful save
+    res.json(newAppointment);
+  } catch (error) {
+    console.error('Error creating appointment:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Read all appointments
+app.get('/appointments', async (req, res) => {
+  try {
+    const appointments = await Appointment.find().sort({ date: 1, time: 1 }); // Sort by date and time
+    res.json(appointments);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Update an appointment by ID
+app.put('/appointments/:id', async (req, res) => {
+  try {
+    const updatedAppointment = await Appointment.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    res.json(updatedAppointment);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Delete an appointment by ID
+app.delete('/appointments/:id', async (req, res) => {
+  try {
+    const deletedAppointment = await Appointment.findByIdAndDelete(req.params.id);
+    res.json(deletedAppointment);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+// Add these endpoints to your server code
+router.get('/appointments/count', async (req, res) => {
+  try {
+    const { status } = req.query;
+
+    if (status) {
+      // Count appointments with the specified status
+      const count = await Appointment.countDocuments({ status });
+      res.json({ count });
+    } else {
+      // Count all appointments
+      const count = await Appointment.countDocuments();
+      console.log('Number of appointments (all statuses):', count);
+      res.json({ count });
+    }
+  } catch (error) {
+    console.error('Error counting appointments:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+// Create a new transaction
+app.post('/transactions', async (req, res) => {
+  try {
+    console.log('Received transaction data:', req.body);
+    const newTransaction = new Transaction(req.body);
+    await newTransaction.save();
+    console.log('Transaction saved successfully:', newTransaction);
+    res.json(newTransaction);
+  } catch (error) {
+    console.error('Error creating transaction:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Read all transactions
+app.get('/transactions', async (req, res) => {
+  try {
+    const transactions = await Transaction.find().sort({ date: 1 }); // Sort by date
+    res.json(transactions);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Update a transaction by ID
+app.put('/transactions/:id', async (req, res) => {
+  try {
+    const updatedTransaction = await Transaction.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    res.json(updatedTransaction);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Delete a transaction by ID
+app.delete('/transactions/:id', async (req, res) => {
+  try {
+    const deletedTransaction = await Transaction.findByIdAndDelete(req.params.id);
+    res.json(deletedTransaction);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 
 // Mount the router on the '/api' path
 app.use('/api', router);
