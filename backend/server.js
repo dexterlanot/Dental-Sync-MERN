@@ -8,15 +8,15 @@ const User = require('./models/userSchema');
 const Patient = require('./models/patient')
 const Appointment = require('./models/appointment');
 const Transaction = require('./models/transaction');
+const dotenv = require('dotenv');
 
-const SECRET_KEY = 'secretkey'
-const multer = require('multer');
-
+dotenv.config();
 
 const app = express();
 const router = express.Router();
 // MongoDB connection
-const dbURI = 'mongodb+srv://2109401:toothtalksdc@cluster0.khpbpme.mongodb.net/toothtalksdcDB?retryWrites=true&w=majority';
+const dbURI = process.env.DB_URI;
+const SECRET_KEY = process.env.SECRET_KEY;
 
 mongoose.connect(dbURI, {
     useNewUrlParser: true, // Corrected option name
