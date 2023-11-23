@@ -6,7 +6,7 @@ function PendingAppointmentsTable() {
   const [pendingAppointments, setPendingAppointments] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
-  const appointmentsPerPage = 3;
+  const appointmentsPerPage = 4;
 
   useEffect(() => {
     fetchPendingAppointments();

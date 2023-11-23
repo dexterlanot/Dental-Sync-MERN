@@ -1,23 +1,19 @@
-// Dashboard.js
 import React, { useState, useEffect } from "react";
 import Sidebar from "../components/Sidebar";
 import axios from "axios";
 import "animate.css";
 import PendingAppointmentsTable from "../components/PendingAppointmentsTable";
 
+
 function Dashboard() {
   const [isSidebarClosed, setSidebarClosed] = useState(false);
   const [numberOfPatients, setNumberOfPatients] = useState(0);
-  const [todayAppointments, setTodayAppointments] = useState(0); // Add this line
-  const [pendingAppointments, setPendingAppointments] = useState(0); // Add this line
+  const [todayAppointments, setTodayAppointments] = useState(0);
+  const [pendingAppointments, setPendingAppointments] = useState(0);
   const [totalAppointments, setTotalAppointments] = useState(0);
-
-
-  const toggleSidebar = () => {
-    setSidebarClosed(!isSidebarClosed);
-  };
-
   const [greeting, setGreeting] = useState("");
+  const [userName, setUserName] = useState("");
+  const [transactionAmountData, setTransactionAmountData] = useState(null);
 
   useEffect(() => {
     const currentHour = new Date().getHours();
@@ -34,7 +30,10 @@ function Dashboard() {
     fetchAppointmentsCount("Completed", setTodayAppointments);
     fetchAppointmentsCount("Pending", setPendingAppointments);
     fetchTotalAppointments();
+    fetchUserInfo();
+
   }, []);
+
 
   const fetchTotalAppointments = async () => {
     try {
@@ -52,7 +51,7 @@ function Dashboard() {
   const fetchAppointmentsCount = async (status, setCount) => {
     try {
       const currentDate = new Date();
-      const formattedDate = currentDate.toISOString(); // Use ISO string for comparison
+      const formattedDate = currentDate.toISOString();
 
       const response = await axios.get(
         `http://localhost:3001/api/appointments/count?status=${status}&date=${formattedDate}`
@@ -70,10 +69,34 @@ function Dashboard() {
       const response = await axios.get(
         "http://localhost:3001/api/patients/count"
       );
-      console.log("Number of patients:", response.data.count); // Log the count
+      console.log("Number of patients:", response.data.count);
       setNumberOfPatients(response.data.count);
     } catch (error) {
       console.error("Error fetching number of patients:", error);
+    }
+  };
+
+  const fetchUserInfo = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch("http://localhost:3001/api/userinfo", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        const { firstname, lastname } = data;
+        const fullName = `${firstname} ${lastname}`;
+        setUserName(fullName);
+      } else {
+        console.error("Failed to fetch user information");
+      }
+    } catch (error) {
+      console.error("Error fetching user information:", error);
     }
   };
 
@@ -81,10 +104,13 @@ function Dashboard() {
     <section className={`dashboard ${isSidebarClosed ? "close" : ""}`}>
       <Sidebar
         isSidebarClosed={isSidebarClosed}
-        toggleSidebar={toggleSidebar}
+        toggleSidebar={() => setSidebarClosed(!isSidebarClosed)}
       />
       <div className="bar-toggle">
-        <i className="uil uil-bars sidebar-toggle" onClick={toggleSidebar}></i>
+        <i
+          className="uil uil-bars sidebar-toggle"
+          onClick={() => setSidebarClosed(!isSidebarClosed)}
+        ></i>
       </div>
       <div className="overview " id="overview">
         <div className="dash-content">
@@ -92,7 +118,7 @@ function Dashboard() {
             <div className="greetandinfo">
               <div className="greetings">
                 <h1 className="animate__animated animate__fadeInUp">
-                  {greeting} Dr. {"{Name here}"}{" "}
+                  {greeting} Dr. {userName}
                 </h1>
                 <p className="animate__animated animate__fadeInUp">
                   Tooth Talks Dental Clinic
@@ -116,28 +142,32 @@ function Dashboard() {
             <div className="boxes">
               <div className="box box1 animate__animated animate__zoomIn">
                 <div className="icon">
-                  <span className="text">Pending  <br/> Appointments</span>
-                  <i class="uil uil-clock-five"></i>
+                  <span className="text">
+                    Pending <br /> Appointments
+                  </span>
+                  <i className="uil uil-clock-five"></i>
                 </div>
                 <span className="number">{pendingAppointments}</span>
               </div>
               <div className="box box2 animate__animated animate__zoomIn">
                 <div className="icon">
-                  <span className="text">Completed  <br/> Appointments</span>
-                  <i class="uil uil-thumbs-up"></i>
+                  <span className="text">
+                    Completed <br /> Appointments
+                  </span>
+                  <i className="uil uil-thumbs-up"></i>
                 </div>
                 <span className="number">{todayAppointments}</span>
               </div>
               <div className="box box3 animate__animated animate__zoomIn">
                 <div className="icon">
                   <span className="text"> Scheduled </span>
-                  <i class="uil uil-list-ol-alt"></i>
+                  <i className="uil uil-list-ol-alt"></i>
                 </div>
                 <span className="number"> {totalAppointments} </span>
               </div>
               <div className="box box4 animate__animated animate__zoomIn">
                 <div className="icon">
-                  <span className="text">Total <br/> Patients</span>
+                  <span className="text">Total <br /> Patients</span>
                   <i className="uil uil-user"></i>
                 </div>
                 <span className="number">{numberOfPatients}</span>
@@ -145,6 +175,7 @@ function Dashboard() {
             </div>
             <PendingAppointmentsTable />
           </div>
+
         </div>
       </div>
     </section>

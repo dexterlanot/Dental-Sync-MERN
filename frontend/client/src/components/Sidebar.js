@@ -30,12 +30,7 @@ function Sidebar({ isSidebarClosed, toggleSidebar }) {
               <span className="link-name"> Transactions </span>
             </NavLink>
           </li>
-          <li>
-            <NavLink to="/profile" className="side-bar-link profile" activeClassName="active">
-              <i className="uil uil-user-md"></i>
-              <span className="link-name"> Profile </span>
-            </NavLink>
-          </li>
+          
         </ul>
       </div>
     </nav>

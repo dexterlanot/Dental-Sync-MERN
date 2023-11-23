@@ -727,9 +727,13 @@ td {
 .pending-table th,
 td {
   border-bottom: 1px solid var(--grey);
-  padding: 8px 20px;
+  padding: 7px 20px;
   font-size: 12px;
   text-align: left;
+}
+
+.pending-table th.treatment-type, .pending-table td.treatment-type {
+  width: 300px;
 }
 
 tr:hover td {
@@ -1132,4 +1136,8 @@ td {
   cursor: pointer;
   text-align: center;
   font-size: 14px;
+}
+.uploaded-picture {
+  width: 20%;
+  height: 100px;
 }

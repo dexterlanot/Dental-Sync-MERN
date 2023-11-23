@@ -8,7 +8,9 @@ const User = require('./models/userSchema');
 const Patient = require('./models/patient')
 const Appointment = require('./models/appointment');
 const Transaction = require('./models/transaction');
+
 const SECRET_KEY = 'secretkey'
+const multer = require('multer');
 
 
 const app = express();
@@ -260,6 +262,29 @@ app.delete('/transactions/:id', async (req, res) => {
   }
 });
 
+// Add this route to your backend
+app.get('/api/userinfo', async (req, res) => {
+  try {
+    const token = req.headers.authorization.split(' ')[1];
+    const decoded = jwt.verify(token, SECRET_KEY);
+    const user = await User.findById(decoded.userId, { firstname: 1, lastname: 1 });
+    
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.json({ firstname: user.firstname, lastname: user.lastname });
+  } catch (error) {
+    console.error('Error fetching user information:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+const transactionAmounts = [1000, 1500, 2000, 1200, 1800, 2500, 3000];
+
+app.get('/transactions/amounts', (req, res) => {
+  res.json(transactionAmounts);
+});
 
 // Mount the router on the '/api' path
 app.use('/api', router);
