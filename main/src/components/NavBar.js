@@ -10,6 +10,13 @@ function Navbar() {
     window.open(externalLink, "_blank");
   };
 
+  const handleAppointment = () => {
+    const externalLink = "https://www.facebook.com/Dr.JimboPlata";
+
+    window.open(externalLink, "_blank");
+  };
+
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -68,7 +75,7 @@ function Navbar() {
             </Link>
           </li>
           <li>
-            <Link to="/" className="appointment-link">
+            <Link to="/" className="appointment-link" onClick={handleAppointment}>
               Book an Appointment
             </Link>
           </li>
